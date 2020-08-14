@@ -1,4 +1,5 @@
 import React from 'react';
+import LocationPin from "./Components/LocationPin";
 import GoogleMap from 'google-map-react';
 
 function App() {
@@ -14,18 +15,13 @@ function App() {
                 center = {location}
                 zoom = {11}
             >
-                <Test
+                <LocationPin
+                    address = {location.address}
                     lat = {location.lat}
                     lng = {location.lng}
-                ></Test>
+                />
             </GoogleMap>
         </div>
     );
 }
 export default App;
-
-function Test() {
-    return(
-        <p>poop</p>
-    )
-}
