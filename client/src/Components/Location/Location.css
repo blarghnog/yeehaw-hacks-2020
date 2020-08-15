@@ -1,0 +1,32 @@
+.search {
+    margin: 20px;
+}
+ 
+.cityInput {
+    float: left;
+    padding: 10px;
+    font-size: 18px;
+    font-size: 18px;
+    width: 20%;
+    border: 1px solid grey;
+    background: rgba(240, 239, 239, 0.842);
+}
+
+.searchButton {
+    padding: 10px;
+    float: left;
+    background: #319df5;
+    font-size: 18px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+    color: white;
+}
+
+.searchButton:hover {
+    background: #3394e4;
+}
+
+.cityInput:hover {
+    background: rgba(235, 232, 232, 0.842);
+}
