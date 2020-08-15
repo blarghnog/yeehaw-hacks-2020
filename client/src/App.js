@@ -1,35 +1,66 @@
-import React from 'react';
-import Location from "./Components/Location.js";
+import React, { useState, useEffect } from 'react';
+import './App.css'
+import Location from "./Components/Location/Location";
 import LocationPin from "./Components/LocationPin/LocationPin";
+import LocationList from "./Components/LocationList/LocationList";
 import GoogleMap from 'google-map-react';
 import apiKey from './apiKey';
 
 function App() {
-    const location = {
-        address: "1600 Amphitheatre Parkway, Mountain View, california.",
-        lat: 37.42216,
-        lng: -122.08427,
-    };
-    
-    fetch('https://maps.googleapis.com/maps/api/place/textsearch/xml?query=restaurants+in+Sydney&key=')
+    const [places, setPlaces] = useState([]);
+
+    useEffect(() => {
+        fetch('api/cowboyQuery')
         .then(response => response.json())
-        .then(data => console.log(data));
+        .then(data => {
+            console.log(data);
+            setPlaces(data.results);
+        })
+        .catch(error => console.log(error))
+    }, []);
+
+    const distanceToMouse = (markerPos, mousePos) => {
+        const x = markerPos.x;
+        const y = markerPos.y
+        return (Math.sqrt(Math.pow((x - mousePos.x - 20), 2) + (Math.pow((y - mousePos.y) - 30, 2))));
+      };
+
+    const location = {
+        address: "Springfield, Virginia.",
+        lat: 38.7767257,
+        lng: -77.2117384
+    };
 
     return(
-        <div>
-            <Location />
-            <div style={{ height: "90vh", width: "100%"}}>
-                <GoogleMap
-                    bootstrapURLKeys = {{ key: apiKey }}
-                    center = {location}
-                    zoom = {11}
-                >
-                    <LocationPin
-                        address = {location.address}
-                        lat = {location.lat}
-                        lng = {location.lng}
-                    />
-                </GoogleMap>
+        <div className = "bodySection">
+            <div className = "top">
+                <Location 
+                    places = {places}
+                />
+            </div>
+            <div className = "bottom">
+                <LocationList
+                    places = {places}
+                />
+                <div 
+                    className = "map"
+                    style = {{ height: "90vh", width: "75%" }}>
+                    <GoogleMap
+                        bootstrapURLKeys = {{ key: apiKey }}
+                        center = {location}
+                        zoom = {10}
+                        hoverDistance = {20}
+                        distanceToMouse = {distanceToMouse}
+                    >
+                        {places.map((location, index) => (
+                                <LocationPin 
+                                    display = { location.name } 
+                                    lat = { location.geometry.location.lat }
+                                    lng = { location.geometry.location.lng }
+                                />
+                            ))}
+                    </GoogleMap>
+                </div>
             </div>
         </div>
     );

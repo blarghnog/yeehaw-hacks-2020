@@ -1,14 +1,26 @@
 .pin {
     display: flex;
-    width: fit-content;
     flex-direction: row;
+    transform: translate(-1.2rem, -2.2rem);
+    position: absolute;
+    width: 10rem;
+    height: 3rem;
+    top: -1.5rem;
+    left: -1.5rem;
 }
 
 .pinIcon {
-    font-size: 5rem;
+    font-size: 3rem;
+    position: absolute;
     color: darkred;
 }
 
-.pinAddress {
+.pinText {
+    background-color: rgb(240, 85, 85);
+    color: white;
+    height: fit-content;
+    padding: 0.5rem;
     font-size: 1rem;
+    display: none;
+    transform: translate(30%, 0%);
 }
