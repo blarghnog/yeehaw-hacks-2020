@@ -1,0 +1,14 @@
+.pin {
+    display: flex;
+    width: fit-content;
+    flex-direction: row;
+}
+
+.pinIcon {
+    font-size: 5rem;
+    color: darkred;
+}
+
+.pinAddress {
+    font-size: 1rem;
+}
