@@ -8,12 +8,15 @@ function Location() {
     }
     
     return (
-        <div>
-            <input 
+        <div className="search">
+            <input
+                className="cityInput"
                 type="text" 
+                placeholder="Search City..."
                 value={searchCity} 
                 onChange={(e) => handleChange(e.target.value)} 
-            />
+            /> 
+            <button className="searchButton" type="submit">Search</button>
         </div>
     )
 }
