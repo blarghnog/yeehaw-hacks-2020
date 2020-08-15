@@ -2,6 +2,7 @@ import React from 'react';
 import Location from "./Components/Location.js";
 import LocationPin from "./Components/LocationPin/LocationPin";
 import GoogleMap from 'google-map-react';
+import apiKey from './apiKey';
 
 function App() {
     const location = {
@@ -19,7 +20,7 @@ function App() {
             <Location />
             <div style={{ height: "90vh", width: "100%"}}>
                 <GoogleMap
-                    
+                    bootstrapURLKeys = {{ key: apiKey }}
                     center = {location}
                     zoom = {11}
                 >
