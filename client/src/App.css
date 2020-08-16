@@ -17,4 +17,19 @@
 .top {
   height: 10vh;
   width: 100%;
+  background: rgb(238, 213, 131);
 }
+
+.title {
+  display: block;
+  float: left;
+  margin: 20px;
+  text-align: center;
+  font-size: 30px;
+  color: brown;
+  font-weight: bold;
+  width: 20%;
+}
+
+
+
