@@ -1,24 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import './App.css'
+import './App.css';
 import Location from "./Components/Location/Location";
-import LocationPin from "./Components/LocationPin/LocationPin";
 import LocationList from "./Components/LocationList/LocationList";
 import Radius from "./Components/Radius/Radius";
-import GoogleMap from 'google-map-react';
+import StateSelect from './Components/StateSelect/StateSelect';
+import LocationPin from "./Components/LocationPin/LocationPin";
+import Map from 'google-map-react';
 import apiKey from './apiKey';
+
 
 function App() {
     const [places, setPlaces] = useState([]);
 
     useEffect(() => {
-        fetch('api/cowboyQuery')
+        fetchData("cowboyQuery")
+    }, []);
+
+    const fetchData = query => {
+        fetch(`api/${query}`)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
+            data.results.forEach(element => {
+                element.active = false;
+            });
             setPlaces(data.results);
+            console.log("chill")
         })
         .catch(error => console.log(error))
-    }, []);
+    }
+
+    const invertActive = (index, bool) => {
+        let updatedPlaces = [...places];
+        updatedPlaces[index].active = bool
+        setPlaces(updatedPlaces);
+    }
 
     const distanceToMouse = (markerPos, mousePos) => {
         const x = markerPos.x;
@@ -45,12 +60,13 @@ function App() {
             </div>
             <div className = "bottom">
                 <LocationList
-                    places = {places}
+                    places = {places} 
+                    invertActive = {invertActive}
                 />
                 <div 
                     className = "map"
-                    style = {{ height: "90vh", width: "75%" }}>
-                    <GoogleMap
+                    style = {{ height: "75vh", width: "75%" }}>
+                    <Map
                         bootstrapURLKeys = {{ key: apiKey }}
                         center = {location}
                         zoom = {10}
@@ -59,12 +75,13 @@ function App() {
                     >
                         {places.map((location, index) => (
                                 <LocationPin 
-                                    display = { location.name } 
-                                    lat = { location.geometry.location.lat }
-                                    lng = { location.geometry.location.lng }
+                                    key = {index}
+                                    lat = {location.geometry.location.lat}
+                                    lng = {location.geometry.location.lng}
+                                    location = {location}
                                 />
                             ))}
-                    </GoogleMap>
+                    </Map>
                 </div>
             </div>
         </div>

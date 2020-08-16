@@ -1,0 +1,11 @@
+.stateSelect {
+    font-size: 18px;
+    padding: 10px;
+    background: rgba(240, 239, 239, 0.842);
+    border-width: 1px;
+    border: 1px thing grey;
+}
+
+.stateSelect:hover {
+    background: rgba(235, 232, 232, 0.842);
+}

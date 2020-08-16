@@ -17,6 +17,13 @@ app.get('/api/cowboyQuery', (req,res) => {
     .catch(error => console.log(error))
 });
 
+app.get('/api/placeQuery', (req,res) => {
+    fetch(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=cowboy&key=${apiKey.apiKey}`)
+    .then(response => response.json())
+    .then(data => res.send(data))
+    .catch(error => console.log(error))
+});
+
 app.get('*', (req,res) =>{
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });

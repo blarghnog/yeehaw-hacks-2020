@@ -3,11 +3,12 @@ import { Icon } from '@iconify/react';
 import locationIcon from '@iconify/icons-mdi/map-marker';
 import './LocationPin.css';
 
-function LocationPin({ display, $hover }) {
+function LocationPin({ $hover, location, invertActive, index, places }) {
 
     const textStyle = {
-        display: $hover ? 'block' : 'none',
+        display:  location.active || $hover? 'block' : 'none',
     }
+
     return(
         <div className = "pin">
             <Icon
@@ -15,7 +16,12 @@ function LocationPin({ display, $hover }) {
                 style = {{}}
                 icon = {locationIcon} 
             />
-            <div className = "pinText" style = {textStyle}>{display}</div>
+            <div 
+                className = "pinText" 
+                style = {textStyle}
+            >
+                {location.name}
+            </div>
         </div>
     );
 }
