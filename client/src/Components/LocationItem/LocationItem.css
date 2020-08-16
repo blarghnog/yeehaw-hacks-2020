@@ -1,0 +1,9 @@
+.locationItem {
+    padding: 2rem;
+    border-bottom: thin solid rgb(200, 200, 200)
+}
+
+.locationItem:hover {
+    cursor: pointer;
+    background-color: rgb(240, 240, 240);
+}
