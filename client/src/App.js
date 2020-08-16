@@ -35,10 +35,13 @@ function App() {
     return(
         <div className = "bodySection">
             <div className = "top">
-                <Location 
-                    places = {places}
-                />
-                <Radius />
+                <div className = "title">Wild West Locater!</div>
+                <div>
+                    <Location 
+                        places = {places}
+                    />
+                    <Radius />
+                </div>
             </div>
             <div className = "bottom">
                 <LocationList
