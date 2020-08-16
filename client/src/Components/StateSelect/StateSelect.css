@@ -4,6 +4,7 @@
     background: rgba(240, 239, 239, 0.842);
     border-width: 1px;
     border: 1px thing grey;
+    margin-left: 10px;
 }
 
 .stateSelect:hover {

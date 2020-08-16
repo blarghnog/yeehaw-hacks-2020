@@ -10,17 +10,33 @@ app.use(cors());
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-app.get('/api/cowboyQuery', (req,res) => {
+app.get('/api/cowboyQuery', (req, res) => {
     fetch(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=cowboy&key=${apiKey.apiKey}`)
     .then(response => response.json())
     .then(data => res.send(data))
     .catch(error => console.log(error))
 });
 
-app.get('/api/placeQuery', (req,res) => {
-    fetch(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=cowboy&key=${apiKey.apiKey}`)
+app.get('/api/placeQuery', (req, res) => {
+
+    let location = {
+        lng: "",
+        lat: ""
+    }
+    req.query.city = req.query.city.split(' ').join('+');
+
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${req.query.city},+${req.query.state}&key=${apiKey.apiKey}`)
     .then(response => response.json())
-    .then(data => res.send(data))
+    .then(data => {
+        data.results.forEach(item => {
+            location=item.geometry.location;
+        })
+    })
+    .then(() => fetch(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=cowboy&location=${location.lat},${location.lng}&radius=${req.query.radius}&key=${apiKey.apiKey}`)
+        .then(response => response.json())
+        .then(data => {res.send(data)})
+        .catch(error => console.log(error))
+    )
     .catch(error => console.log(error))
 });
 

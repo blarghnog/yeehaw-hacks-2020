@@ -1,11 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
 import "./Location.css";
 
-function Location() {
-    const [searchCity, setSearchCity] = useState("");
+function Location({ query, setQuery }) {
+    
 
     const handleChange = val => {
-        setSearchCity(val);
+        const temp = {...query}
+        temp.city = val;
+        setQuery(temp);
     }
     
     return (
@@ -14,10 +16,9 @@ function Location() {
                 className="cityInput"
                 type="text" 
                 placeholder="Search City..."
-                value={searchCity} 
+                value={query.city} 
                 onChange={(e) => handleChange(e.target.value)} 
             /> 
-            <button className="searchButton" type="submit">Search</button>
         </div>
     )
 }

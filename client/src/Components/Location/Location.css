@@ -9,21 +9,18 @@
     width: 20%;
     border: 1px solid grey;
     background: rgba(240, 239, 239, 0.842);
+    margin-left: 10px;
 }
 
 .searchButton {
     padding: 10px;
     float: left;
-    background: #319df5;
+    background: brown;
     font-size: 18px;
     border: 1px solid grey;
     border-left: none;
     cursor: pointer;
     color: white;
-}
-
-.searchButton:hover {
-    background: #3394e4;
 }
 
 .cityInput:hover {

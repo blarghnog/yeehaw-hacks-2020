@@ -1,11 +1,17 @@
 import React from 'react';
 import "./StateSelect.css";
 
-export default function StateSelect() {
+export default function StateSelect( { query, setQuery }) {
 
     return(
         <select 
             className = "stateSelect"
+            value = {query.state}
+            onChange = {(e) => {
+                const temp = {...query}
+                temp.state = e.target.value;
+                setQuery(temp);
+            }}
             >
             <option value="AL">AL</option>
             <option value="AK">AK</option>

@@ -11,12 +11,18 @@ import apiKey from './apiKey';
 
 function App() {
     const [places, setPlaces] = useState([]);
+    const [query, setQuery] = useState({
+        method: "POST",
+        city: "",
+        state: "",
+        radius: "",
+    });
 
     useEffect(() => {
         fetchData("cowboyQuery")
     }, []);
 
-    const fetchData = query => {
+    const fetchData = (query) => {
         fetch(`api/${query}`)
         .then(response => response.json())
         .then(data => {
@@ -42,7 +48,7 @@ function App() {
       };
 
     const location = {
-        address: "Springfield, Virginia.",
+        address: "Washington D.C., Virginia.",
         lat: 38.7767257,
         lng: -77.2117384
     };
@@ -50,12 +56,19 @@ function App() {
     return(
         <div className = "bodySection">
             <div className = "top">
-                <div className = "title">Wild West Locater!</div>
+                <div className = "title">Cowboy Mingle</div>
                 <div>
-                    <Location 
-                        places = {places}
-                    />
-                    <Radius />
+                    <button 
+                        className="searchButton" 
+                        type="submit"
+                        onClick={() => {fetchData(`placeQuery?city=${query.city}&state=${query.state}&radius=${query.radius}`)}}
+                        >
+                            Search
+                    </button>
+                    <Location query = {query} setQuery = {setQuery} />
+                    <StateSelect query = {query} setQuery = {setQuery}  />
+                    <Radius query = {query} setQuery = {setQuery} />
+                    
                 </div>
             </div>
             <div className = "bottom">
@@ -65,7 +78,7 @@ function App() {
                 />
                 <div 
                     className = "map"
-                    style = {{ height: "75vh", width: "75%" }}>
+                    style = {{ height: "85vh", width: "75%" }}>
                     <Map
                         bootstrapURLKeys = {{ key: apiKey }}
                         center = {location}

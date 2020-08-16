@@ -1,9 +1,10 @@
 .locationItem {
     padding: 2rem;
-    border-bottom: thin solid rgb(200, 200, 200)
+    border-bottom: thin solid rgb(200, 200, 200);
+    background-color: rgba(103, 149, 92, 0.7);
 }
 
 .locationItem:hover {
     cursor: pointer;
-    background-color: rgb(240, 240, 240);
+    background-color: rgba(103, 149, 92, 0.9);
 }
