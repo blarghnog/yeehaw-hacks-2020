@@ -3,6 +3,7 @@ import './App.css'
 import Location from "./Components/Location/Location";
 import LocationPin from "./Components/LocationPin/LocationPin";
 import LocationList from "./Components/LocationList/LocationList";
+import Radius from "./Components/Radius/Radius";
 import GoogleMap from 'google-map-react';
 import apiKey from './apiKey';
 
@@ -37,6 +38,7 @@ function App() {
                 <Location 
                     places = {places}
                 />
+                <Radius />
             </div>
             <div className = "bottom">
                 <LocationList
